@@ -1,0 +1,45 @@
+baseURL: "https://qqqy.dev"
+title: "沉海记"
+theme: "etch"
+languageCode: "en-US"
+enableInlineShortcodes: true
+pygmentsCodeFences: true
+pygmentsUseClasses: true
+
+params:
+  description: "沉默入海"
+  copyright: "Copyright © 2023 YANG QIA"
+  dark: "auto"
+  highlight: true
+
+menu:
+  main:
+    - identifier: "posts"
+      name: "posts"
+      title: "posts"
+      url: "/posts/"
+      weight: 1
+    - identifier: "categories"
+      name: "categories"
+      title: "categories"
+      url: "/categories/"
+      weight: 2
+    - identifier: "about"
+      name: "about"
+      title: "about"
+      url: "/about/"
+      weight: 3
+    - identifier: "résumé"
+      name: "résumé"
+      title: "résumé"
+      url: "/resume/"
+      weight: 4
+
+permalinks:
+  posts: "/:title/"
+
+markup:
+  goldmark:
+    renderer:
+      # Allows HTML in Markdown
+      unsafe: true
