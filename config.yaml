@@ -14,11 +14,6 @@ params:
 
 menu:
   main:
-    - identifier: "posts"
-      name: "posts"
-      title: "posts"
-      url: "/posts/"
-      weight: 1
     - identifier: "categories"
       name: "categories"
       title: "categories"

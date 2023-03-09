@@ -1,13 +1,13 @@
 @media (min-width: 770px) {
 body {
-    width: 600px;
+    width: 800px;
     line-height: 1.5;
 }
 
-main#content hr {
+/* main#content hr {
     width: 108%;
     margin-left: -3.8%;
-}
+} */
 
 /* index.html styles */
 header#banner h2 {
