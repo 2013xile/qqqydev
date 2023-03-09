@@ -14,7 +14,8 @@ program, quest system without coding.
 - The system has greatly reduced the required manpower and time of development (about 4 days/
 person) for changeable marketing campaigns, boost DAU by 40% of our products in 2021.
 - Mentored 5+ interns, new graduates, vendors.
-- Promoted from T5 to T8 in just 1.5 years (normally 2-3 years).
+- Promoted from T5 to T8 in just 1.5 years (normally 2-3 years).    
+
 Main Technology Stack: Golang, NodeJS, PostgresSQL, MySQL, Redis, Kafka, Kubernetes
 
 2018.8-2020.7: Kongpingji Co. (Cosmetic e-commerce startup)
@@ -27,17 +28,18 @@ Remote Full Stack Developer. Design and develop a cosmetic social platform and o
 payments.
 - Processed and formatted over one million data of cosmetic products.
 - Provided RESTful APIs using Laravel, and implemented web pages based on a design using
-React and Vue.
+React and Vue.  
+
 Main Technology Stack: PHP, Laravel, React, Vue, Docker
 
 ### Education
 ---
 2016-2020: **Bachelor, Mathematics,** *South University of Science and Technology of China*
 
-### Honor Award
+<!-- ### Honor Award
 ---
 2021H1: **Outstanding Employee** (5% of the employees),
-*Tencent Holdings Ltd.*
+*Tencent Holdings Ltd.* -->
 
 ### Skills
 ---
