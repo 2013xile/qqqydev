@@ -3,7 +3,11 @@ title: YANG QIA
 ---
 ### Work Experience 
 ---
-2020.7-Present: **Tencent Holdings Ltd**  
+2023.04-Present: **Nocobase**
+
+Full Stack Engineer.
+
+2020.7-2023.04: **Tencent Holdings Ltd**  
 
 Backend Developer (Level: T8). As a member of Tencent Health team, design and develop user growth system that services millions of users.
 
