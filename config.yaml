@@ -10,7 +10,7 @@ params:
   description: "沉默入海"
   copyright: "Copyright © 2023 YANG QIA"
   dark: "auto"
-  highlight: true
+  # highlight: true
 
 menu:
   main:

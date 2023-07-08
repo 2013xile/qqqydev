@@ -1,4 +1,6 @@
-*, *:before, *:after {
+*,
+*:before,
+*:after {
     box-sizing: border-box;
 }
 
@@ -83,13 +85,13 @@ main#content h3 {
     font-size: 1.9rem;
 }
 
-main#content h1 + p,
-main#content h2 + p,
-main#content h3 + p,
-main#content h4 + p,
-main#content h5 + p,
-main#content h6 + p {
-    margin-top: 5px;
+main#content h1+p,
+main#content h2+p,
+main#content h3+p,
+main#content h4+p,
+main#content h5+p,
+main#content h6+p {
+    margin-top: 10px;
 }
 
 main#content p {
@@ -148,7 +150,7 @@ main#content header#post-header h1 {
     line-height: 1.15;
 }
 
-main#content header#post-header > div {
+main#content header#post-header>div {
     display: block;
     font-size: 0.85em;
     color: #767676;
@@ -172,11 +174,13 @@ main#content #toc nav#TableOfContents {
     margin-top: 4px;
 }
 
-main#content #toc nav#TableOfContents > ul, main#content #toc nav#TableOfContents > ol {
+main#content #toc nav#TableOfContents>ul,
+main#content #toc nav#TableOfContents>ol {
     margin-left: -40px;
 }
 
-main#content #toc ul, main#content #toc ol {
+main#content #toc ul,
+main#content #toc ol {
     font-size: 0.98em;
     margin: 0;
     padding: 0 0 0 40px;
@@ -239,7 +243,7 @@ main#content blockquote {
     font-style: italic;
     margin-top: 10px;
     margin-bottom: 10px;
-    margin-left: 50px;
+    margin-left: 0;
     padding-left: 15px;
     border-left: 3px solid #ccc;
 }
@@ -250,8 +254,7 @@ main#content pre {
 }
 
 main#content code {
-    font-size: 0.96em;
-    padding: 0 5px;
+    border-radius: 6px;
 }
 
 main#content pre {
@@ -260,17 +263,23 @@ main#content pre {
     font-size: 14px;
     font-size: 1.4rem;
     white-space: pre;
-    margin: 20px 0;
-    padding: 1.5rem 1.5rem;
     line-height: 1.4;
 }
 
-main#content pre code {
-    padding: 0;
+main#content p code,
+main#content h1 code {
+    background-color: #6E768166;
+    color: #E6EDF3;
+    border-radius: 3px;
+    padding: 1px 6px;
 }
 
 main#content .footnotes {
     font-size: 0.9em;
+}
+
+article h1 {
+    font-size: 20px;
 }
 
 footer#footer {
