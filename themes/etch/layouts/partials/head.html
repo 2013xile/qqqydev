@@ -5,7 +5,8 @@
     <meta name="description" content="{{ . }}">
     {{ end }}
     {{ printf `
-    <link rel="shortcut icon" href="%s">` ("favicon.ico" | absURL) | safeHTML }}
+    <link rel="shortcut icon" href="%s">` ("favicon.ico" | absURL) | safeHTML }}<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap" media="print" onload="this.media='all'">
     {{ with .OutputFormats.Get "rss" -}}
     {{ printf `
