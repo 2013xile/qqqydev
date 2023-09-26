@@ -1,5 +1,5 @@
 ---
-title: React中的useCallback和ahooks中的useMemoizedFn
+title: React中的 useCallback 和 ahooks 中的 useMemoizedFn
 date: "2023-09-20"
 categories:
   - Frontend
@@ -8,7 +8,7 @@ categories:
 
 > 应该是一个比较常见的问题了，但是在我这段工作开始之前，我有两三年没有正儿八经写前端了，我的 `React` 经验还停留在 `React 16`, 基本上算一个新手，所以记录一下。
 
-事情的起因是我在组件的 `useEffect` 中依赖了一个外部函数，当函数没有添加到依赖数组时，eslint会报错 "mssing dependency".
+事情的起因是我在组件的 `useEffect` 中依赖了一个外部函数，当函数没有添加到依赖数组时，eslint 会报错 "mssing dependency".
 
 <img src="https://s2.loli.net/2023/09/21/CBbOykuAm6VFW7N.png"/>
 
