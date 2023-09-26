@@ -41,8 +41,8 @@ async function dowload(ctx, next) {
 > Since we use [Koa](https://koajs.com/), I can make use of `ctx.attachment`. It is equivalent to:
 
 ```JavaScript
-this.set('Content-disposition', 'attachment; filename=' + filename);
-this.set('Content-type', 'application/gzip');
+ctx.set('Content-disposition', 'attachment; filename=' + filename);
+ctx.set('Content-type', 'application/gzip');
 ```
 
 # Stream-based packaging and download
