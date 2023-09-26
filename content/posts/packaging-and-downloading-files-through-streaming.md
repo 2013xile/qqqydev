@@ -8,11 +8,11 @@ categories:
 
 # Background
 
-Last week, I developed a feature that can package the log files produced by the application into a `tar.gz` file and enbale online downloading. While this is may seem like a straight forward feature, there are still some intriguing aspects worth documenting.
+Last week, I developed a feature that can package the log files produced by the application into a `tar.gz` file and enable online downloading. While this is may seem like a straight forward feature, there are still some intriguing aspects worth documenting.
 
 # Generate temporary file, delete later
 
-The simplest method to implement this feature is to generate a tarball on the server's disk and delete it after it's been downloaded. The code is roughtly like this:
+The simplest method to implement this feature is to generate a tarball on the server's disk and delete it after it's been downloaded. The code is roughly like this:
 
 ```JavaScript
 import fs from 'fs';
