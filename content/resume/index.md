@@ -1,54 +1,89 @@
 ---
 title: YANG QIA
 ---
-### Work Experience 
+
+### Work Experience
+
 ---
-2023.04-Present: **Nocobase**
 
-Full Stack Engineer.
+**NocoBase Co., Ltd.**  
+_2023.04-Present_ _Full Stack Engineer_
 
-2020.7-2023.04: **Tencent Holdings Ltd**  
+_Projects_
 
-Backend Developer (Level: T8). As a member of Tencent Health team, design and develop user growth system that services millions of users.
+<a href="https://nocobase.com" target="_blank">NocoBase</a>
 
-*Achievements/Tasks*
-- Design and develop a marketing campaign system (api server, rules engine, quest system,
-reward server) which supports marketing managers to set up complex campaign like referral
-program, quest system without coding.
-- The system has greatly reduced the required manpower and time of development (about 4 days/
-person) for changeable marketing campaigns, boost DAU by 40% of our products in 2021.
+- Authentication.
+- Data visualization.
+- Localization.
+- Users & Departments.
+- Infrastructure: cache, logger, telemetry.
+
+**Tencent Holdings Ltd**  
+_2020.7-2023.04_ _Backend Developer_
+
+As a member of Tencent Healthcare team, design and develop a user growth operation platform that services millions of users.
+
+_Projects_
+
+User Growth Operation Platform (Primary owner)
+
+- Design system architecture and develop micro services: API server, Rules engine, Quest system, Reward server, Audit system.
+- Handle distributed transactions and data consistency. TCC, Saga, etc.
+- Security guarantee. Audit log and fund reconciliation.
+- Refactor, from NodeJS to Go. Migrated over 100 millions of user data without shutdowning servies.
+- Allows marketing managers to set up complex campaign like referral program, quest system without coding. It greatly reduced the required manpower and time of development (about 4 days / person) for changeable marketing campaigns.
+- Help boosting DAU by 40% of our products in 2021.
+- Main Technology Stack: Golang, NodeJS, PostgresSQL, MySQL, Redis, Kafka, Kubernetes.
+
+_Team building_
+
 - Mentored 5+ interns, new graduates, vendors.
-- Promoted from T5 to T8 in just 1.5 years (normally 2-3 years).    
+- Be the first in our group to learn Go and share learning experiences with other colleagues.
 
-Main Technology Stack: Golang, NodeJS, PostgresSQL, MySQL, Redis, Kafka, Kubernetes
+_Achievements_
 
-2018.8-2020.7: Kongpingji Co. (Cosmetic e-commerce startup)
+- Outstanding Employee (top 5%) of 2021H1.
+- Promoted from T5 to T8 in just 1.5 years (normally 2-3 years).
 
-Remote Full Stack Developer. Design and develop a cosmetic social platform and online mall.
+Kongpingji Co. (Cosmetic e-commerce startup)  
+_2018.8-2020.7_ _Full Stack Developer_
 
-*Achievements/Tasks*
-- Developed a website where users can post comments on cosmetic products.
-- Developed an online mall where users can add products to the cart, place orders, and make
-payments.
-- Processed and formatted over one million data of cosmetic products.
-- Provided RESTful APIs using Laravel, and implemented web pages based on a design using
-React and Vue.  
+Design and develop a cosmetic social platform and online mall.
 
-Main Technology Stack: PHP, Laravel, React, Vue, Docker
+_Projects_
+
+Online cosmetic mall
+
+- Develop wechat mini program (had ceased to operate).
+- Design and develop RESTful APIs.
+- Key features: products, cart, orders, payments, comments.
+
+Cosmetic WMS & OMS
+
+- Preprocess and cleanse over one million data of cosmetic products from various channels.
+- Design and develop features for managing products and inventory.
+- Deisgn and develop features for managing orders and integrating with ERP.
+
+Main Technology Stack: PHP, MySQL, Laravel, React, Vue, Docker
+
+WP Ninja (Web development team)  
+_2016.9-2018.8_ _Web developer_
+
+Main Technoloy Stack: PHP, MySQL, WordPress, Slim, Vue, JQuery, Nginx
 
 ### Education
----
-2016-2020: **Bachelor, Mathematics,** *South University of Science and Technology of China*
 
-<!-- ### Honor Award
 ---
-2021H1: **Outstanding Employee** (5% of the employees),
-*Tencent Holdings Ltd.* -->
+
+2016-2020: **Bachelor, Mathematics,** _South University of Science and Technology of China_
 
 ### Skills
+
 ---
-Backend: Golang NodeJS PHP C++   
-Frontend: React Vue   
-DevOps: Linux Git Docker Kubernetes   
-Database: MySQL PostgresSQL Redis MongoDB   
-English: Professional working proficiency   
+
+Backend: Golang, NodeJS, PHP, C/C++  
+Frontend: React, Vue  
+DevOps: Linux, Git, Docker, Kubernetes
+Database: MySQL, PostgreSQL, Redis, MongoDB  
+English: Professional working proficiency
