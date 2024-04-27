@@ -1,0 +1,105 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="沉默入海"><link rel="shortcut icon" href=https://qqqy.dev/favicon.ico><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap" media=print onload='this.media="all"'><link rel=stylesheet href=/css/style.min.css><link rel=canonical href=https://qqqy.dev/implement-infinite-scrolling-using-intersectionobserver-in-react/><link href=https://cdn.bootcdn.net/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css rel=stylesheet><script src=https://cdn.bootcdn.net/ajax/libs/highlight.js/11.7.0/highlight.min.js></script>
+<script>hljs.initHighlightingOnLoad()</script><title>Implement infinite scrolling using IntersectionObserver in React</title></head><body><header id=banner><h2><a href=https://qqqy.dev>沉海记</a></h2><nav><ul><li><a href=/categories/ title=categories>categories</a></li><li><a href=/about/ title=about>about</a></li><li><a href=/resume/ title=résumé>résumé</a></li></ul></nav></header><main id=content><article><header id=post-header><h1>Implement infinite scrolling using IntersectionObserver in React</h1><div><time>March 21, 2024</time></div></header><blockquote><p>Documenting a method for implementing infinite scrolling using <code>IntersectionObserver</code> in React.</p></blockquote><h1 id=introduction>Introduction</h1><p>In web development, it is a common requirement to automatically load the next page of a list when the scroll bar touches the bottom. There are typically two approaches to achieve this. One is to compare the distance of the scroll bar from the top of the container with the height of the container itself. The other is to use the <a href=https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API target=_blank><code>IntersectionObserver</code></a> API.</p><blockquote><p>The Intersection Observer API provides a way to asynchronously observe changes in the intersection of a target element with an ancestor element or with a top-level document&rsquo;s viewport.</p></blockquote><h1 id=solution>Solution</h1><p>With the help of <code>IntersectionObserver</code>, we can monitor the last item of the current list. When it appears in the viewport, we load the next page and then move the observer to the last item of the next page.</p><h1 id=implemention>Implemention</h1><p>Here&rsquo;s a simple implementation idea, including some pseudo code. You&rsquo;ll need to modify it according to your needs to make it runnable.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=nx>React</span><span class=p>,</span> <span class=p>{</span> <span class=nx>useCallback</span><span class=p>,</span> <span class=nx>useEffect</span><span class=p>,</span> <span class=nx>useRef</span><span class=p>,</span> <span class=nx>useState</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;react&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>useLoadMoreObserver</span> <span class=o>=</span> <span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>loadMore</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>loadMore</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=k>void</span><span class=p>;</span> <span class=c1>// callback
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>})</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>[</span><span class=nx>lastItem</span><span class=p>,</span> <span class=nx>setLastItem</span><span class=p>]</span> <span class=o>=</span> <span class=nx>useState</span><span class=p>&lt;</span><span class=nt>React.RefObject</span><span class=err>&lt;</span><span class=na>any</span><span class=p>&gt;</span><span class=o>&gt;</span><span class=p>(</span><span class=kc>null</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>observer</span> <span class=o>=</span> <span class=nx>useRef</span><span class=p>&lt;</span><span class=nt>IntersectionObserver</span> <span class=err>|</span> <span class=na>null</span><span class=p>&gt;(</span><span class=kc>null</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>observeExposure</span> <span class=o>=</span> <span class=nx>useCallback</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nx>lastItem</span>: <span class=kt>React.RefObject</span><span class=p>&lt;</span><span class=nt>any</span><span class=p>&gt;)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>lastItem</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=nx>observer</span><span class=p>.</span><span class=nx>current</span> <span class=o>&amp;&amp;</span> <span class=nx>observer</span><span class=p>.</span><span class=nx>current</span><span class=p>.</span><span class=nx>disconnect</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>      <span class=nx>observer</span><span class=p>.</span><span class=nx>current</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>IntersectionObserver</span><span class=p>((</span><span class=nx>entries</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>entries</span><span class=p>.</span><span class=nx>forEach</span><span class=p>((</span><span class=nx>entry</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=k>if</span> <span class=p>(</span><span class=nx>entry</span><span class=p>.</span><span class=nx>target</span> <span class=o>!==</span> <span class=nx>lastItem</span><span class=p>.</span><span class=nx>current</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>          <span class=p>}</span>
+</span></span><span class=line><span class=cl>          <span class=k>if</span> <span class=p>(</span><span class=nx>entry</span><span class=p>.</span><span class=nx>isIntersecting</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>observer</span><span class=p>.</span><span class=nx>current</span> <span class=o>&amp;&amp;</span> <span class=nx>observer</span><span class=p>.</span><span class=nx>current</span><span class=p>.</span><span class=nx>unobserve</span><span class=p>(</span><span class=nx>lastItem</span><span class=p>.</span><span class=nx>current</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=nx>loadMore</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>          <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>});</span>
+</span></span><span class=line><span class=cl>      <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=nx>lastItem</span><span class=p>.</span><span class=nx>current</span> <span class=o>&amp;&amp;</span>
+</span></span><span class=line><span class=cl>        <span class=nx>observer</span><span class=p>.</span><span class=nx>current</span> <span class=o>&amp;&amp;</span>
+</span></span><span class=line><span class=cl>        <span class=nx>observer</span><span class=p>.</span><span class=nx>current</span><span class=p>.</span><span class=nx>observe</span><span class=p>(</span><span class=nx>lastItem</span><span class=p>.</span><span class=nx>current</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>[</span><span class=nx>loadMore</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nx>useEffect</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>observeExposure</span><span class=p>(</span><span class=nx>lastItem</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>observer</span><span class=p>.</span><span class=nx>current</span> <span class=o>&amp;&amp;</span> <span class=nx>observer</span><span class=p>.</span><span class=nx>current</span><span class=p>.</span><span class=nx>disconnect</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span> <span class=p>[</span><span class=nx>lastItem</span><span class=p>,</span> <span class=nx>observeExposure</span><span class=p>]);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>lastItem</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>setLastItem</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>List</span>: <span class=kt>React.FC</span> <span class=o>=</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>[</span><span class=nx>data</span><span class=p>,</span> <span class=nx>setData</span><span class=p>]</span> <span class=o>=</span> <span class=nx>useState</span><span class=p>(</span><span class=kc>null</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>[</span><span class=nx>list</span><span class=p>,</span> <span class=nx>setList</span><span class=p>]</span> <span class=o>=</span> <span class=nx>useState</span><span class=p>([]);</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>[</span><span class=nx>loading</span><span class=p>,</span> <span class=nx>setLoading</span><span class=p>]</span> <span class=o>=</span> <span class=nx>useState</span><span class=p>(</span><span class=kc>false</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>loadMore</span> <span class=o>=</span> <span class=nx>useCallback</span><span class=p>(</span><span class=kr>async</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>meta</span> <span class=o>=</span> <span class=nx>data</span><span class=o>?</span><span class=p>.</span><span class=nx>meta</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>meta</span> <span class=o>||</span> <span class=nx>meta</span><span class=p>.</span><span class=nx>page</span> <span class=o>&gt;=</span> <span class=nx>meta</span><span class=p>.</span><span class=nx>totalPage</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>setLoading</span><span class=p>(</span><span class=kc>true</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// request next page
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kr>const</span> <span class=nx>res</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>axios</span><span class=p>.</span><span class=nx>request</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>url</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>params</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>page</span>: <span class=kt>meta.page</span> <span class=o>+</span> <span class=mi>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>pageSize</span>: <span class=kt>meta.pageSize</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=nx>setData</span><span class=p>(</span><span class=nx>data</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nx>setLoading</span><span class=p>(</span><span class=kc>false</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span> <span class=p>[]);</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>{</span> <span class=nx>lastItem</span><span class=p>,</span> <span class=nx>setLastItem</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>useLoadMoreObserver</span><span class=p>({</span> <span class=nx>loadMore</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nx>useEffect</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>data</span><span class=o>?</span><span class=p>.</span><span class=nx>data</span><span class=o>?</span><span class=p>.</span><span class=nx>length</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>ref</span> <span class=o>=</span> <span class=nx>React</span><span class=p>.</span><span class=nx>createRef</span><span class=p>&lt;</span><span class=nt>any</span><span class=p>&gt;();</span>
+</span></span><span class=line><span class=cl>    <span class=nx>setLastItem</span><span class=p>(</span><span class=nx>ref</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nx>setList</span><span class=p>((</span><span class=nx>prev</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>prev</span><span class=p>.</span><span class=nx>concat</span><span class=p>(</span><span class=nx>data</span><span class=p>.</span><span class=nx>data</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span> <span class=p>[</span><span class=nx>data</span><span class=p>,</span> <span class=nx>setLastItem</span><span class=p>]);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>items</span> <span class=o>=</span> <span class=nx>useMemo</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>()</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=nx>list</span><span class=p>.</span><span class=nx>map</span><span class=p>((</span><span class=nx>item</span>: <span class=kt>any</span><span class=p>,</span> <span class=nx>index</span>: <span class=kt>number</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>({</span>
+</span></span><span class=line><span class=cl>        <span class=nx>key</span>: <span class=kt>item.name</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>label</span>:
+</span></span><span class=line><span class=cl>          <span class=kt>index</span> <span class=o>===</span> <span class=nx>roles</span><span class=p>.</span><span class=nx>length</span> <span class=o>-</span> <span class=mi>1</span> <span class=o>?</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=p>&lt;</span><span class=nt>div</span> <span class=na>ref</span><span class=o>=</span><span class=p>{</span><span class=nx>lastItem</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span><span class=nx>item</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>)</span> <span class=o>:</span> <span class=nx>item</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>})),</span>
+</span></span><span class=line><span class=cl>    <span class=p>[</span><span class=nx>list</span><span class=p>,</span> <span class=nx>lastItem</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>roles</span><span class=p>.</span><span class=nx>length</span> <span class=o>?</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>Menu</span> <span class=na>items</span><span class=o>=</span><span class=p>{</span><span class=nx>items</span><span class=p>}</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>)</span> <span class=o>:</span> <span class=s1>&#39;No data&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></div></article><script src=https://giscus.app/client.js data-repo=xilesun/qqqydev data-repo-id=R_kgDOJHBOqg data-category=Comments data-category-id=DIC_kwDOJHBOqs4CXwE5 data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=preferred_color_scheme data-lang=en data-loading=lazy crossorigin=anonymous async></script></main><footer id=footer>Copyright © 2023 YANG QIA</footer></body></html>
