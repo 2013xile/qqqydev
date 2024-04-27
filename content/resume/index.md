@@ -31,7 +31,7 @@ User Growth Operation Platform (Primary owner)
 - Design system architecture and develop micro services: API server, Rules engine, Quest system, Reward server, Audit system.
 - Handle distributed transactions and data consistency. TCC, Saga, etc.
 - Security guarantee. Audit log and fund reconciliation.
-- Refactor, from NodeJS to Go. Migrated over 100 millions of user data without shutdowning servies.
+- Refactor, from NodeJS to Go. Migrated over 100 millions of user data without shutdowning services.
 - Allows marketing managers to set up complex campaign like referral program, quest system without coding. It greatly reduced the required manpower and time of development (about 4 days / person) for changeable marketing campaigns.
 - Help boosting DAU by 40% of our products in 2021.
 - Main Technology Stack: Golang, NodeJS, PostgresSQL, MySQL, Redis, Kafka, Kubernetes.
