@@ -1,4 +1,74 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tags on 沉海记</title><link>https://qqqy.dev/tags/</link><description>Recent content in Tags on 沉海记</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><atom:link href="https://qqqy.dev/tags/index.xml" rel="self" type="application/rss+xml"/><item><title>Implement infinite scrolling using IntersectionObserver in React</title><link>https://qqqy.dev/implement-infinite-scrolling-using-intersectionobserver-in-react/</link><pubDate>Thu, 21 Mar 2024 00:00:00 +0000</pubDate><guid>https://qqqy.dev/implement-infinite-scrolling-using-intersectionobserver-in-react/</guid><description>&lt;blockquote>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tags on 沉海记</title><link>https://qqqy.dev/tags/</link><description>Recent content in Tags on 沉海记</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><atom:link href="https://qqqy.dev/tags/index.xml" rel="self" type="application/rss+xml"/><item><title>回顾在 NocoBase 远程工作这一年</title><link>https://qqqy.dev/%E5%9B%9E%E9%A1%BE%E5%9C%A8-nocobase-%E8%BF%9C%E7%A8%8B%E5%B7%A5%E4%BD%9C%E8%BF%99%E4%B8%80%E5%B9%B4/</link><pubDate>Fri, 10 May 2024 00:00:00 +0000</pubDate><guid>https://qqqy.dev/%E5%9B%9E%E9%A1%BE%E5%9C%A8-nocobase-%E8%BF%9C%E7%A8%8B%E5%B7%A5%E4%BD%9C%E8%BF%99%E4%B8%80%E5%B9%B4/</guid><description>&lt;blockquote>
+&lt;p>本来我计划在入职一周年的时候写这篇文章，但是由于那段时间，我们正忙于发布 NocoBase 1.0 版本，所以这篇文章写的稍晚了一些。值得高兴的时候，1.0 版本在上个月底终于发布了，虽然过程磕磕绊绊，但好在是跟用户见面了。在此之前，我们已经将发布时间推迟了好几次。借此机会，也想回顾一下在 NocoBase 远程工作的这一年。&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="nocobase-介绍">NocoBase 介绍&lt;/h1>
+&lt;p>NocoBase 是一个开源的无代码平台，迄今为止已经开发了三年多，在过去鲜有宣发的情况下，GitHub 也积累了 5.6k 的 Star, 和一些忠实的用户。在我看来，NocoBase 有一些区别于竞品的特点:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>NocoBase 采用微内核，插件化的架构。我们通常不会强调功能大而全面，我们更注重扩展性。依靠我们团队目前的人力，也不可能在系统功能上做到面面俱到。在 NocoBase 内核的基础上，我们很容易开发集成自己想要的功能，我们更多的提供接入功能的协议和接口，而非具体的功能。举个例子，我们在设计用户认证模块的时候，就充分考虑了可扩展性。不同客户想要的登录认证方式有无数种，而我们默认只提供密码，短信，CAS, OIDC, SAML 等常见的方式，显然还有很多客户的需求没有办法照顾到。得益于可扩展的接口设计，我们基本上在一到两天内就能开发接入一种新的用户认证方式。即使客户提出的功能我们可能当下并不具备，我们也能快速满足客户的需求。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>无代码和低代码在讨论的时候经常一起出现，NocoBase 的绝大多数功能都以无代码的方式提供。和很多竞品可以直接在网页上写代码不同，NocoBase 鲜有可以直接编写代码的地方，功能扩展基本上依靠开发插件的形式。这一点上，孰优孰劣，见仁见智。我个人是不喜欢在 Web 应用上塞一堆难以维护的脚本代码，所以我更倾向于我们现在的做法。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>不同于很多低代码平台的界面配置交互是通过拖拉拽来编排，NocoBase 由模型驱动界面，强调 UI 和数据分离。同一张表同一套数据，可以通过很多不同形式呈现。NocoBase 提供了表格，表单，看板，图表，日历，列表等不同的展示方式，这些不用的展示方法在 NocoBase 里面统称为区块，区块内部可以配置不同的数据表字段和对应的字段组件。NocoBase 的页面由区块组合完成。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>不同于很多竞品通过 Sass 的方式提供服务，NocoBase 强调的独立部署。NocoBase 并不提供特定的功能服务，它更像一个基架，我们的用户可以在此基础上搭建自己的产品，甚至提供自己的 Sass 服务。通过插件扩展系统功能，每个人都可以搭建出独一无二的产品。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h1 id="加入-nocobase">加入 NocoBase&lt;/h1>
+&lt;p>在加入 NocoBase 之前，我已经关注过一段时间。在我还在上大学的时候，就跟现在团队的 Tech Lead 霖哥有过几年时间的紧密合作，可以说在我刚开始做项目的时候，他就是我的 Mentor. 他开始做这个项目的时候，就跟我简单介绍过。由于对彼此的熟悉，所以我在加入团队前也没有过多的考察。当然这个时候我已经正式工作了几年，在选择一个新工作的时候我也有自己的考量，幸运的是后面跟我们现在的老板老周聊的也很愉快，很多理念都比较契合，于是就敲定了合作意向。简单来说有几点：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>团队有合理的目标和良好的长期规划，大家都是长期主义者，能够沉下心来做好产品。NocoBase 已经开发了三年时间，也即将进入商业化阶段，我加入的时间是一个不错的时间节点。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>我以前也接触过一些 2B, 2G 的私有化项目，往往定制程度非常高，而且作为纯粹的乙方角色，不管是前期沟通还是后期工作都非常心累。在这边我们基本掌握产品设计和开发的自主权，多数时候我们只开发大部分客户需要的通用功能，不需要提供保姆服务，高度定制化的需求由客户自主开发插件实现。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>离开大厂，我希望接下来的工作环境能让我更加专注地写代码，而不是面向绩效、晋级编程。我希望深度参与一个我认可的产品，充分发挥我的长处。在了解了 NocoBase 以后，我对 NocoBase 未来的发展抱有信心。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h1 id="完成第一个任务">完成第一个任务&lt;/h1>
+&lt;p>我在 NocoBase 的第一个任务是重构用户认证模块。彼时 NocoBase 已经支持密码、短信、OIDC, SAML 等几种用户认证方式，但仍然存在以下问题：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>现有认证方式比较有限，只能满足小部分客户的需要。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>不同的用户认证模式在整体流程上有很多相似的地方，但这几种认证方式各自作为插件独立存在，代码逻辑上没有很好的复用。如果有客户需要一种新的认证方式，我们只能从头开始实现。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>如前文所提到的，我们的首要任务不是开发更多的认证方式插件来满足客户的需求，因为这样低效且没有止境。我的任务目标是在内核实现一个认证管理模块，定义一套标准的认证接口，插件开发者只需要实现标准接口，并注册到认证管理模块，即可扩展一种新的认证方式。&lt;/p>
+&lt;p>在一开始实现需求的时候，我并没有做的很好。虽然我对自己拆解需求、设计方案和适应新项目的能力有足够的信心，但是初来乍到，前期也存在一定的沟通不畅的问题，一开始我写的代码只能说不尽人意。好在经过反复几轮的沟通和讨论，最终确定并实现了一个相对合理的方案。作为第一个任务，这个结果也算及格。&lt;/p>
+&lt;p>经过几次迭代，目前 NocoBase 的用户认证模块设计我个人还是比较满意的。近日我在开发新的 LDAP 认证插件的时候，基本上用一天时间就写完了主流程代码，再用一天时间完善细节、补充测试和文档，跟过去的开发一个认证插件的效率对比有极大的提升。&lt;/p>
+&lt;p>对于如何更快地融入一个新的开发团队，和上手一个新项目，我自己也有一些心得。我认为认真走读代码是一件收益很大的事情，哪怕可能需要花很长时间。不管是以前工作中接触到的新项目还是 NocoBase, 我都是这样做的。在加入 NocoBase 之前，我对 NocoBase 的项目代码进行了走读，梳理了各个模块的关系和作用，对于重点部分代码，逐行阅读。包括 NocoBase 核心涉及到的几个重要的开源库，比如 Formily, Sequelize, 我也通过文档了解和学习。这个过程对于我后来快速上手开发有很大的帮助。&lt;/p>
+&lt;h1 id="团队特色和文化">团队特色和文化&lt;/h1>
+&lt;p>NocoBase 团队是一个全员远程工作的团队，人数不多，有几位同事也是跟我差不多时间加入的。大多数同事都是开发，有一位同事负责测试工作。老周主要负责商务工作，他经常带来一些关于不同行业的客户的新鲜的消息。为商业化推广做准备，今年初我们也加入了一位负责运营工作的同事。&lt;/p>
+&lt;p>平常工作的时间大家基本上通过 IM 沟通，偶尔需要通过在线会议小范围地讨论需求细节，另外每周有一次全员周会，时间大概在2到3个小时，除此之外，再也没有什么琐事会打断工作。平时如果有私事要处理，也不需要请假，只需要妥善安排好工作即可。&lt;/p>
+&lt;p>在 NocoBase 工作和以往工作最大的不同在于，团队的每个人都身兼多职。一个新功能的诞生大致需要经过以下步骤：&lt;/p>
+&lt;ol>
+&lt;li>需求分析和讨论&lt;/li>
+&lt;li>撰写功能文档和设计原型&lt;/li>
+&lt;li>实现方案调研和确定&lt;/li>
+&lt;li>开发（包括单元测试、接口测试、e2e测试等）&lt;/li>
+&lt;li>人工测试&lt;/li>
+&lt;li>撰写使用手册&lt;/li>
+&lt;li>合并发布&lt;/li>
+&lt;/ol>
+&lt;p>我们没有专门的产品经理，一个新需求在刚提出的初期通常比较模糊，即使有文档，也只是一个雏形，并不具体。所以往往要求功能的开发负责人能够主导整个过程，包括最初的功能设计、方案调研，到开发测试，撰写文档。当然在这个过程中也有其他同事的合作，但最终的产出结果由该功能的开发负责人负责。功能的开发负责人不再是单纯的开发者的角色，除了编写逻辑清晰良好、可维护性强的代码以外，往往还需要思考功能的合理性和易用性，包括一些交互设计的细节也需要考虑。&lt;/p>
+&lt;p>我们在考察新人的时候，除了考察基本的编码能力和对项目的理解程度，同时也注重观察他在开发功能的过程中，有没有自己对功能设计的深入思考，能否进一步完善功能细节，还是只能按部就班，点到为止。所以有很多人可能编码能力也不差，但并不能很好的适应我们的开发方式。我们团队的成员，没有很多的光环和头衔，可能编码能力也不是最出众的，但气场一定是互相契合的。&lt;/p>
+&lt;p>我们团队的氛围很好，在能力范围之内，不管是不是自己负责的功能，多数时候大家都能参与讨论，提出自己的建议和看法，供负责人参考。每个人都保持对 NocoBase 的热情，不断思考，持续输出。&lt;/p>
+&lt;h1 id="对团队和-nocobase-的期待">对团队和 NocoBase 的期待&lt;/h1>
+&lt;p>NocoBase 在我刚加入的时候，开发体系建设还不够完善，相对来说有点刀耕火种。我记得光 ESlint 规则检查我就提出了好几次，直到后面一位新同事超杰加入，他也提出了这个问题并着手进行了改进，我们的代码项目总算才有了代码规则检查。更别说还有大量模块缺少相应的自动化测试。&lt;/p>
+&lt;p>令人欣慰的是，在这短短一年的时间，我们在快速迭代新功能的同时，也在不断优化项目架构和提升代码质量。我们重构了大量模块，优化了应用的生命周期，完善内核 API 设计，补充了大量单元测试和接口测试。引入 E2E, 代替部分人工测试，提高测试效率，同时也更好地保障了代码的稳定性。&lt;/p>
+&lt;p>刚发布了 NocoBase 1.0, 虽然还只是 alpha 版本，但对于我们来说也是一个重要的里程碑。我们开始将 NocoBase 商业化，并准备进一步地推广。NocoBase 让我们接触到了各行各业不同的客户，打开了我们认识这个世界的方式。NocoBase 还能给我们带来什么，这是我所期待的。像霖哥刚开始的时候跟我聊的，希望写代码也能在互联网上留下来一点什么东西。&lt;/p>
+&lt;h1 id="远程办公的感受">远程办公的感受&lt;/h1>
+&lt;p>最后聊一聊远程办公一年的一点感受。基本上我在工作日的时间安排是：8点到9点之间起床洗漱，做早饭，通常是蒸鸡蛋和馒头，按下定时以后，下楼到小区隔壁的菜市场买菜，回来以后吃早饭，大概10点钟开始工作，一直到12点半左右，做午饭、吃饭、休息，到下午3点继续工作，到5点半或者6点，开始准备晚饭，等女朋友下班xD，吃晚饭。忙的时候晚上通常还需要工作1到2个小时的时间，偶尔会更长。&lt;/p>
+&lt;p>总体来说，在家办公工作效率是比较高的。一天工作的总时长可能会比过去的工作稍短，但大多数时间注意力是更专注的。在办公室里经常会被打断，算下来的有效工作时间还更短。&lt;/p>
+&lt;p>不过在家办公容易陷入一种所谓 Burnout 的状态，因为一直坐在“工位”上，有时候明明需要休息了，还会想要把手上的问题解决完，但问题又持续产生，就不容易停下来。我也在努力把握工作和生活的平衡，除了工作以外，也需要注重休息和运动。&lt;/p>
+&lt;p>另外我还希望在工作之余能找到其他一些可以持续去做的事情，也可能是做一些 Side projects, 但目前好像还没有找到特别适合自己的有意思的事。去年我尝试在B站讲CS50x这门课，想要用自己的知识和经验帮助一些计算机的初学者，但也只进行到一半，过完年因为工作比较忙，就暂时搁置了，过段时间可能会重启。未来希望除了 NocoBase 作为主要的事业，还能找到其他一些适合自己的发展方向。&lt;/p></description></item><item><title>Implement infinite scrolling using IntersectionObserver in React</title><link>https://qqqy.dev/implement-infinite-scrolling-using-intersectionobserver-in-react/</link><pubDate>Thu, 21 Mar 2024 00:00:00 +0000</pubDate><guid>https://qqqy.dev/implement-infinite-scrolling-using-intersectionobserver-in-react/</guid><description>&lt;blockquote>
 &lt;p>Documenting a method for implementing infinite scrolling using &lt;code>IntersectionObserver&lt;/code> in React.&lt;/p>
 &lt;/blockquote>
 &lt;h1 id="introduction">Introduction&lt;/h1>
